@@ -1,5 +1,9 @@
 # LifeBridge AI - Intelligent Organ & Blood Matching System
 
+<p align="center">
+    <img src="./media/LifeBridgeLogo.png" alt="LifeBridge AI Logo" />
+</p>
+
 Agentic AI for life-saving logistics: Instantly matches donors, alerts hospitals, and coordinates transport to cut delays and prevent organ or rare blood waste.
 
 ## Project Structure
