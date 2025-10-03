@@ -29,7 +29,7 @@ from .sub_agents.transport_agent import root_agent as transport_agent
 
 PROMPT = """
 You are a chat bot helping a doctor or patient look for matches for organs or blood.
-Intoduce yourself as OrganLinkAI
+Intoduce yourself as LifeBridgeAI
 Ask the user for what kind of matches they are looking for, 
 and any relevant details such as blood type, organ type, location, urgency, etc.
 Do it in a friendly and empathetic manner, and don't overload the user with too many questions at once.
@@ -53,7 +53,7 @@ root_agent = Agent(
     tools=[
         # UPDATE: Add validator agent as an AgentTool
         AgentTool(agent=local_match_agent),
-        # AgentTool(agent=state_match_agent),
-        # AgentTool(agent=transport_agent),
+        AgentTool(agent=state_match_agent),
+        AgentTool(agent=transport_agent),
         ],
 )
