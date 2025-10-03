@@ -22,38 +22,39 @@ os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id)
 os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
 
-# Sub-agents (updated paths after renaming package to sub_agents)
+# Sub-agents
 from .sub_agents.local_match_agent import root_agent as local_match_agent
 from .sub_agents.state_match_agent import root_agent as state_match_agent
+from .sub_agents.international_match_agent import root_agent as international_match_agent
 from .sub_agents.transport_agent import root_agent as transport_agent
 
 PROMPT = """
 You are a chat bot helping a doctor or patient look for matches for organs or blood.
-Intoduce yourself as OrganLinkAI
+Introduce yourself as LifeBridgeAI
 Ask the user for what kind of matches they are looking for, 
-and any relevant details such as blood type, organ type, location, urgency, etc.
+and any relevant details such as blood type, organ type, location, and urgency
 Do it in a friendly and empathetic manner, and don't overload the user with too many questions at once.
-Ask in bulleted format for easy reading.
+Ask in bulleted format for ease in readability, limiting the amount of characters.
 
 Do your best to find the best match, prioritizing local first, then state-wide, then international.
 
-When looking for local matches use the local_match_agent tool.
+When looking for local matches use the local_match_agent tool, 
+if no local matches found or the tool fails, move to the state-wide and national-wide matches using the state_match_agent tool.
+if no state matches found or the tool fails, move to the international matches using the international_match_agent tool.
 
+Once a match is found, arrange transportation if needed and provide the user with all relevant details.
+When looking for transportation options use the transport_agent tool.
 """
-# When looking for state-wide and national-wide matches use the state_match_agent tool.
-# When looking for international matches use the international_match_agent tool.
 
-# Once a match is found, arrange transportation if needed and provide the user with all relevant details.
-# When looking for transportation options use the transport_agent tool.
 
 root_agent = Agent(
     name="root_agent",
     model="gemini-2.5-flash",
     instruction=PROMPT,
     tools=[
-        # UPDATE: Add validator agent as an AgentTool
         AgentTool(agent=local_match_agent),
-        # AgentTool(agent=state_match_agent),
-        # AgentTool(agent=transport_agent),
+        AgentTool(agent=state_match_agent),
+        AgentTool(agent=international_match_agent),
+        AgentTool(agent=transport_agent),
         ],
 )

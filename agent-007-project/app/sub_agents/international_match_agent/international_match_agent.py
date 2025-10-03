@@ -59,7 +59,7 @@ def get_current_time(query: str) -> str:
 
 # 
 root_agent = Agent(
-    name="root_agent",
+    name="international_match_agent",
     model="gemini-2.5-flash", # Flexible model choice i.e. chatgpt, claude, deepseek etc.
     instruction="You are a helpful AI assistant designed to provide accurate and useful information.",
     tools=[get_weather, get_current_time],

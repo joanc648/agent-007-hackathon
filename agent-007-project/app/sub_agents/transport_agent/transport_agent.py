@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import datetime
 import os
-from zoneinfo import ZoneInfo
 
 import google.auth
 from google.adk.agents import Agent
+import urllib.parse
 
 _, project_id = google.auth.default()
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id)
@@ -25,42 +24,31 @@ os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
 
 
-def get_weather(query: str) -> str:
-    """Simulates a web search. Use it get information on weather.
-
-    Args:
-        query: A string containing the location to get weather information for.
-
-    Returns:
-        A string with the simulated weather information for the queried location.
-    """
-    if "sf" in query.lower() or "san francisco" in query.lower():
-        return "It's 60 degrees and foggy."
-    return "It's 90 degrees and sunny."
+def generate_map_link(destination:str, travel_mode:str) -> str:
+    if (travel_mode not in ("driving", "walking", "bicycling", "two-wheeler", "transit")):
+        travel_mode = "driving" # default
+    return f"https://www.google.com/maps/dir/?api=1&destination={urllib.parse.quote_plus(destination))}&travelmode={travel_mode}"
 
 
-def get_current_time(query: str) -> str:
-    """Simulates getting the current time for a city.
+PROMPT = """
+You are the Transport Agent responsible for coordinating the logistics of donation delivery. 
+Your role is to:
+- Identify the donor location and donee location. 
+- Suggest transportation options (car, truck, courier, etc.) based on distance, urgency, and cost. 
+- Estimate travel time and delivery windows. 
+- Adapt to weather and traffic conditions that may affect delivery. 
+- Provide structured responses with clear next steps (e.g., pickup time, ETA, vehicle type).
 
-    Args:
-        city: The name of the city to get the current time for.
+You have access to tools for retrieving real-time traffic and mapping from Google Maps. 
+Always return concise recommendations for moving the donation safely and efficiently. 
+If data is missing (like exact addresses), ask clarifying questions.
 
-    Returns:
-        A string with the current time information.
-    """
-    if "sf" in query.lower() or "san francisco" in query.lower():
-        tz_identifier = "America/Los_Angeles"
-    else:
-        return f"Sorry, I don't have timezone information for query: {query}."
-
-    tz = ZoneInfo(tz_identifier)
-    now = datetime.datetime.now(tz)
-    return f"The current time for query {query} is {now.strftime('%Y-%m-%d %H:%M:%S %Z%z')}"
+"""
 
 # 
 root_agent = Agent(
-    name="root_agent",
-    model="gemini-2.5-flash", # Flexible model choice i.e. chatgpt, claude, deepseek etc.
-    instruction="You are a helpful AI assistant designed to provide accurate and useful information.",
-    tools=[get_weather, get_current_time],
+    name="transport_agent",
+    model="gemini-2.5-flash",
+    instruction=PROMPT,
+    tools=[generate_map_link],
 )

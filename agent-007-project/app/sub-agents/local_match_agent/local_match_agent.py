@@ -15,16 +15,16 @@
 import datetime
 import os
 from zoneinfo import ZoneInfo
+import pandas as pd
 
 import google.auth
 from google.adk.agents import Agent
+
 
 _, project_id = google.auth.default()
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id)
 os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
-
-mock_va_data_path = "agent-007-hackathon\agent-007-project\sample_data\va_organ_data_sample.csv"
 
 def get_organs_needed_local(query: str) -> str:
     """
@@ -35,10 +35,16 @@ def get_organs_needed_local(query: str) -> str:
     returns: simple output of number of people in each zipcode
 
     """
+    # Gets state
     if "virginia" in query.lower() or "va" in query.lower():
         state_area = "Virginia"
     else:
         return f"Sorry, I don't have organ information for query: {query}."
+    # read sample csv data
+    mock_va_data = "\sample_data\va_organ_data_sample.csv"
+    df = pd.read_csv(mock_va_data)
+    
+
 
 
 
