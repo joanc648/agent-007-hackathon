@@ -65,7 +65,12 @@ cd agent-007-project && make install && make playground
 For full command options and usage, refer to the [Makefile](Makefile).
 
 
-## Usage
+## UI Mock-Ups
+
+<p align="center">
+    <img src="./media/LandingPage.png" alt="LifeBridge AI Landing Page" />
+</p>
+
 
 
 
