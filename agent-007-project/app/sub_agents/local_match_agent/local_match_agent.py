@@ -12,9 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import datetime
 import os
-from zoneinfo import ZoneInfo
 from pathlib import Path
 import pandas as pd
 
@@ -81,6 +79,6 @@ def get_organs_donors_local(query: str) -> str:
 root_agent = Agent(
     name="local_match_agent",
     model="gemini-2.5-flash", # Flexible model choice i.e. chatgpt, claude, deepseek etc.
-    instruction="You are a helpful AI assistant designed to provide accurate and useful information.",
+    instruction=PROMPT,
     tools=[get_organs_donors_local],
 )
