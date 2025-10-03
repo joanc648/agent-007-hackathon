@@ -16,6 +16,7 @@ import os
 
 import google.auth
 from google.adk.agents import Agent
+import urllib.parse
 
 _, project_id = google.auth.default()
 os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id)
@@ -23,10 +24,10 @@ os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
 
 
-def generate_map_link(destination:str, travelmode:str) -> str:
-    if (travelmode not in ("driving", "walking", "bicycling", "two-wheeler", "transit")):
-        travelmode = "driving" #default
-    return f"https://www.google.com/maps/dir/?api=1&destination={destination.split(" ").join("+")}&travelmode={travel_mode}"
+def generate_map_link(destination:str, travel_mode:str) -> str:
+    if (travel_mode not in ("driving", "walking", "bicycling", "two-wheeler", "transit")):
+        travel_mode = "driving" # default
+    return f"https://www.google.com/maps/dir/?api=1&destination={urllib.parse.quote_plus(destination))}&travelmode={travel_mode}"
 
 
 PROMPT = """
