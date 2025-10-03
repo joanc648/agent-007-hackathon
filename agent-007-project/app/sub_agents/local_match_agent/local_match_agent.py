@@ -33,7 +33,8 @@ Ask the user for their general location, their blood type, and the organ they ne
 Do you best to follow the following format: state, blood type, organ and the urgency
 If the user provides a zip code or area, please ask the user to be more specific in their area
 
-Return the outpu 
+If you cannot find it in local information, use the state_match_agent file
+return the numbers in get_organ_donors_local
 """
 
 # helper function for getting zip code
@@ -47,7 +48,7 @@ def get_organs_donors_local(query: str) -> str:
 
 
     returns: simple output of number of people in each zipcode
-
+    
     """
     
     # Parse query
@@ -74,7 +75,7 @@ def get_organs_donors_local(query: str) -> str:
     filtered_df = filtered_df[filtered_df['country'].str.lower().str.lower().str.strip() == state]
 
 
-    #return f"There are {total_va_records} donors in your state and the amount of donors per zip code are: "
+    return f"There are {len(filtered_df)} donor records in your state area"
 
 
 
