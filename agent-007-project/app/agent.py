@@ -22,7 +22,7 @@ os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id)
 os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
 
-# Sub-agents (updated paths after renaming package to sub_agents)
+# Sub-agents
 from .sub_agents.local_match_agent import root_agent as local_match_agent
 from .sub_agents.state_match_agent import root_agent as state_match_agent
 from .sub_agents.international_match_agent import root_agent as international_match_agent
@@ -34,7 +34,7 @@ Introduce yourself as LifeBridgeAI
 Ask the user for what kind of matches they are looking for, 
 and any relevant details such as blood type, organ type, location, and urgency
 Do it in a friendly and empathetic manner, and don't overload the user with too many questions at once.
-Ask in bulleted format for easy reading, limiting the amount of characters.
+Ask in bulleted format for ease in readability, limiting the amount of characters.
 
 Do your best to find the best match, prioritizing local first, then state-wide, then international.
 
@@ -52,7 +52,6 @@ root_agent = Agent(
     model="gemini-2.5-flash",
     instruction=PROMPT,
     tools=[
-        # UPDATE: Add validator agent as an AgentTool
         AgentTool(agent=local_match_agent),
         AgentTool(agent=state_match_agent),
         AgentTool(agent=international_match_agent),
