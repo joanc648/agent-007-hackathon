@@ -27,6 +27,12 @@ When the user submits this form:
 3. The system shares only necessary details with hospitals, never exposing private patient data.
 4. The user is directed to the Matches Page where they see available hospitals, distance, and contact options.
 
+### Results Page
+
+<p align="center">
+    <img src="./media/ResultsPage.gif" alt="Agent Workflow Diagram" />
+</p>
+
 ## Project Structure
 
 This project is organized as follows:
