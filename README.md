@@ -6,6 +6,10 @@
 
 Agentic AI for life-saving logistics: Instantly matches donors, alerts hospitals, and coordinates transport to cut delays and prevent organ or rare blood waste.
 
+<p align="center">
+    <img src="./media/DemoVideo.gif" alt="App Demo" />
+</p>
+
 ## Agent Workflow Diagram
 
 <p align="center">
@@ -30,7 +34,7 @@ When the user submits this form:
 ### Results Page
 
 <p align="center">
-    <img src="./media/ResultsPage.gif" alt="Agent Workflow Diagram" />
+    <img src="./media/ResultsPage.gif" alt="Results Page" />
 </p>
 
 ## Project Structure
