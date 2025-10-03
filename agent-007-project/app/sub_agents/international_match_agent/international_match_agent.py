@@ -40,5 +40,5 @@ root_agent = Agent(
     name="international_match_agent",
     model="gemini-2.5-flash", # Flexible model choice i.e. chatgpt, claude, deepseek etc.
     instruction=PROMPT,
-    tools=[get_weather, get_current_time],
+    tools=[get_international_match],
 )
