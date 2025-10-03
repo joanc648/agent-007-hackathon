@@ -12,14 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# nomad
-# Local area organ matching agent
-# Gets local area matches 
-# Using chronic Kidney disease dataset info
-# https://www.kaggle.com/datasets/unitedhrsolutions/organ-donation-dataset-2020?resource=download
-# id,age,bp,sg,al,su,rbc,pc,pcc,ba,bgr,bu,sc,sod,pot,hemo,pcv,wc,rc,htn,dm,cad,appet,pe,ane,classification
-# 
-
 import datetime
 import os
 from zoneinfo import ZoneInfo
@@ -32,15 +24,25 @@ os.environ.setdefault("GOOGLE_CLOUD_PROJECT", project_id)
 os.environ.setdefault("GOOGLE_CLOUD_LOCATION", "global")
 os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
 
+mock_va_data_path = "agent-007-hackathon\agent-007-project\sample_data\va_organ_data_sample.csv"
 
-# Get local donars who NEED an organ
-def get_local_donors_need_organ(query: str) -> str:
-    """Simulates getting information to match them
+def get_organs_needed_local(query: str) -> str:
+    """
+    args: string containing question about how many organs needed in area
+    - needs country, state and organ needed
+    - connects to csv file
 
-    Args:
-        query: 
+    returns: simple output of number of people in each zipcode
 
     """
+    if "virginia" in query.lower() or "va" in query.lower():
+        state_area = "Virginia"
+    else:
+        return f"Sorry, I don't have organ information for query: {query}."
+
+
+
+
 
 def get_weather(query: str) -> str:
     """Simulates a web search. Use it get information on weather.
@@ -76,7 +78,7 @@ def get_current_time(query: str) -> str:
 
 # 
 root_agent = Agent(
-    name="local_match_agent",
+    name="root_agent",
     model="gemini-2.5-flash", # Flexible model choice i.e. chatgpt, claude, deepseek etc.
     instruction="You are a helpful AI assistant designed to provide accurate and useful information.",
     tools=[get_weather, get_current_time],
