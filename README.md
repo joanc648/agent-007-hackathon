@@ -12,6 +12,21 @@ Agentic AI for life-saving logistics: Instantly matches donors, alerts hospitals
     <img src="./media/AgentDetails.png" alt="Agent Workflow Diagram" />
 </p>
 
+## UI Mock-Ups
+
+### Landing Page – LifeBridge AI
+This is the first screen users see. They can request blood or organ availability by selecting type, urgency, and zip code. Our system then matches them instantly with hospitals and verified donors nearby.
+
+<p align="center">
+    <img src="./media/LandingPage.png" alt="LifeBridge AI Landing Page" />
+</p>
+
+When the user submits this form:
+1. The request is matched with our dataset of hospitals and blood banks.
+2. Urgency level prioritizes results (Normal, Urgent, Critical).
+3. The system shares only necessary details with hospitals, never exposing private patient data.
+4. The user is directed to the Matches Page where they see available hospitals, distance, and contact options.
+
 ## Project Structure
 
 This project is organized as follows:
@@ -69,22 +84,6 @@ cd agent-007-project && make install && make playground
 | `uv run jupyter lab` | Launch Jupyter notebook                                                                     |
 
 For full command options and usage, refer to the [Makefile](Makefile).
-
-
-## UI Mock-Ups
-
-### Landing Page – LifeBridge AI
-This is the first screen users see. They can request blood or organ availability by selecting type, urgency, and zip code. Our system then matches them instantly with hospitals and verified donors nearby.
-
-<p align="center">
-    <img src="./media/LandingPage.png" alt="LifeBridge AI Landing Page" />
-</p>
-
-When the user submits this form:
-1. The request is matched with our dataset of hospitals and blood banks.
-2. Urgency level prioritizes results (Normal, Urgent, Critical).
-3. The system shares only necessary details with hospitals, never exposing private patient data.
-4. The user is directed to the Matches Page where they see available hospitals, distance, and contact options.
 
 
 
