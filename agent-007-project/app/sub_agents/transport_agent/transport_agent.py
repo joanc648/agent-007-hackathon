@@ -25,10 +25,15 @@ os.environ.setdefault("GOOGLE_GENAI_USE_VERTEXAI", "True")
 
 
 def generate_map_link(destination:str, travel_mode:str) -> str:
+    """
+    Returns a link from the current location to the destination, with optional travel mode specified
+    """
     if (travel_mode not in ("driving", "walking", "bicycling", "two-wheeler", "transit")):
         travel_mode = "driving" # default
-    return f"https://www.google.com/maps/dir/?api=1&destination={urllib.parse.quote_plus(destination))}&travelmode={travel_mode}"
-
+    
+    
+    map_link = f"https://www.google.com/maps/dir/?api=1&destination={urllib.parse.quote_plus(destination)}&travelmode={travel_mode}"
+    return map_link
 
 PROMPT = """
 You are the Transport Agent responsible for coordinating the logistics of donation delivery. 
@@ -39,9 +44,9 @@ Your role is to:
 - Adapt to weather and traffic conditions that may affect delivery. 
 - Provide structured responses with clear next steps (e.g., pickup time, ETA, vehicle type).
 
-You have access to tools for retrieving real-time traffic and mapping from Google Maps. 
+You have access to tools for retrieving real-time traffic and mapping from Google Maps through the generate_map_link function. 
 Always return concise recommendations for moving the donation safely and efficiently. 
-If data is missing (like exact addresses), ask clarifying questions.
+If data is missing (like exact addresses), ask clarifying questions before returning a map link.
 
 """
 
