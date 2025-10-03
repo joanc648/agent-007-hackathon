@@ -57,8 +57,6 @@ def get_organs_donors_local(query: str) -> str:
     state, blood_type, organ, urgency = parts[0], parts[1], parts[2], parts[3]
 
 
-    
-
     # read sample csv data (path is relative to the repository root)
     project_root = Path(__file__).resolve().parents[3]
     mock_va_data_path = project_root / "sample_data" / "va_donor_data_sample.csv"
@@ -74,7 +72,7 @@ def get_organs_donors_local(query: str) -> str:
     # get state
     filtered_df = filtered_df[filtered_df['country'].str.lower().str.lower().str.strip() == state]
 
-
+    # I hope this works.....
     return f"There are {len(filtered_df)} donor records in your state area"
 
 
