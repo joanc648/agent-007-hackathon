@@ -57,10 +57,10 @@ def get_current_time(query: str) -> str:
     now = datetime.datetime.now(tz)
     return f"The current time for query {query} is {now.strftime('%Y-%m-%d %H:%M:%S %Z%z')}"
 
-
+# 
 root_agent = Agent(
     name="root_agent",
-    model="gemini-2.5-flash",
+    model="gemini-2.5-flash", # Flexible model choice i.e. chatgpt, claude, deepseek etc.
     instruction="You are a helpful AI assistant designed to provide accurate and useful information.",
     tools=[get_weather, get_current_time],
 )
