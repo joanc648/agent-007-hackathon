@@ -14,4 +14,4 @@
 
 from .transport_agent import root_agent
 
-__all__ = ["local_match_agent"]
+__all__ = ["root_agent"]
